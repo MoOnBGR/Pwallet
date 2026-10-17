@@ -33,7 +33,6 @@ fun RegisterScreen(
     ) {
         AuthHeader("Crea tu usuario", "Configura tu billetera en este celular", 160.dp)
         AuthCard(Modifier.weight(1f)) {
-            Text("Primer uso", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
             AuthField(
                 label = "Nombre completo",
                 value = form.fullName,
@@ -47,11 +46,6 @@ fun RegisterScreen(
                 onValueChange = { onChange(form.copy(phone = it)) },
                 error = errors[RegisterField.PHONE],
                 keyboardType = KeyboardType.Phone,
-            )
-            CurrencySelector(
-                selected = form.currency,
-                error = errors[RegisterField.CURRENCY],
-                onSelect = { onChange(form.copy(currency = it)) },
             )
 
             Text(
@@ -104,6 +98,13 @@ fun RegisterScreen(
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
+
+            CurrencySelector(
+                selected = form.currency,
+                error = errors[RegisterField.CURRENCY],
+                onSelect = { onChange(form.copy(currency = it)) },
+            )
+
             PrimaryButton("Crear usuario", state.isBusy, onSubmit)
         }
     }
